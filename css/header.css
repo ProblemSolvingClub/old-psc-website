@@ -1,0 +1,35 @@
+html {
+	height: 100%; /* fix height to 100% for IE*/
+	max-height: 100%; /* fix height for other browsers*/
+	padding: 0; /* remove padding */
+	margin: 0; /* remove margins */
+	border: 0; /* remove borders*/
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px 0px 0px 0px;
+	min-width: 500px;
+}
+
+/* General */
+#navbar {
+	height: 110px;
+	background-color: #f1f1f1;
+	margin: 0;
+	padding: 0;
+}
+
+#navLogo {
+	background-image: url('../img/smallPsc.png');
+	background-repeat: no-repeat;
+	position: absolute;
+	display: block;
+	width: 300px;
+	height: 110px;
+}
