@@ -24,6 +24,7 @@ body {
 	margin: 0;
 	padding: 0;
 	width: 100%;
+	zoom: 1; /* IE 6 & 7 */
 }
 
 #navLogo {
@@ -33,6 +34,7 @@ body {
 	display: block;
 	width: 181px;
 	height: 133px;
+	float: left;
 }
 
 #logo {
@@ -43,8 +45,8 @@ body {
 }
 
 #navButtonsContainer {
-	width: 60%;
 	margin: auto;
+	margin-left: 181px;
 }
 
 .navButtons {
@@ -52,5 +54,6 @@ body {
 	text-decoration: none;
 	margin: 10%;
 	font-family: 'Rajdhani', sans-serif;
-	font-size: 20px
+	font-size: 20px;
+	line-height: 100px;
 }
