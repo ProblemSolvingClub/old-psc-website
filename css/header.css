@@ -15,12 +15,13 @@ body {
 	margin: 0px;
 	padding: 0px 0px 0px 0px;
 	min-width: 500px;
+	overflow: hidden;
 }
 
 /* General */
 #navbar {
 	height: 133px;
-	background-color: #f1f1f1;
+	background-color: white;
 	margin: 0;
 	padding: 0;
 	width: 100%;
@@ -55,13 +56,13 @@ body {
 	margin: 10%;
 	font-family: 'Rajdhani', sans-serif;
 	font-size: 20px;
-	line-height: 100px;
+	line-height: 140px;
 	padding-top: 15px;
 	position: relative;
 	width: 250px;
-	-webkit-transition: padding-top 0.5s,width 0.5s;
+	/*-webkit-transition: padding-top 0.5s,width 0.5s;
 	-moz-transition: padding-top 0.5s,width 0.5s;
-	transition: padding-top 0.5s,width 0.5s;
+	transition: padding-top 0.5s,width 0.5s;*/
 }
 
 .navButtons:before{
@@ -70,15 +71,15 @@ body {
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 100%;
+	width: 150px;
 	height: 1px;
 	background: #bdbdbd;
-	-webkit-transition: height 0.5s,width 0.3s,opacity 0.5s;
-	-moz-transition: height 0.5s,width 0.3s,opacity 0.5s;
-	transition: height 0.5s,width 0.3s,opacity 0.5s;
+	-webkit-transition: width 0.5s ease;
+	-moz-transition: width 0.5s ease;
+	transition: width 0.5s ease;
 }
 
-.navButtons:hover:after{
+.navButtons:after{
 	content: "";
 	display: block;
 	position: absolute;
@@ -87,7 +88,22 @@ body {
 	height: 1px;
 	width: 0;
 	background: #000;
-	-webkit-transition: width 0.3s,opacity 0.5s;
-	-moz-transition: width 0.3s,opacity 0.5s;
-	transition: width 0.3s,opacity 0.5s;
+	-webkit-transition: width 0.5s ease;
+	-moz-transition: width 0.5s ease;
+	transition: width 0.5s ease;
+}
+
+.navButtons:hover:after{
+	width:150px;
+}
+
+.sidebar{
+	background-color: #222326;
+	left: 73%;
+	width: 27%;
+	position: absolute;
+	height: 80%;
+	padding: 0 4%;
+	z-index: 3;
+
 }
