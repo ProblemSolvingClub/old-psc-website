@@ -33,7 +33,7 @@ body {
 }
 
 #navLogo {
-	background-image: url('../img/smallPsc.png');
+	background-image: url('../img/pscInverted.png');
 	background-repeat: no-repeat;
 	position: absolute;
 	display: block;
