@@ -1,0 +1,84 @@
+.banner{
+	background-color: #222326;
+	width: 80%;
+	height: 10%;
+	padding: 0 4%;
+	z-index: 10;
+	color: #fff;
+	margin: auto;
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+.mainContent{
+	width: 73%;
+	left: 0%;
+	position: absolute;
+	height: 100%;
+	z-index: 3;
+	color: #fff;
+}
+
+.content{
+	position: absolute;
+	height: 100%;
+	width:100%;
+	z-index: 3;
+	color: #fff;
+	display: block;
+}
+
+.column{
+	height: 100%;
+	color: : #fff;
+	width: 33%;
+	display: inline-block;
+}
+
+.column:not(:last-child){
+	border-right: 1px solid #4d4d4d;
+}
+
+.contentHeader{
+	font-family: 'Rajdhani', sans-serif;
+	text-decoration: none;
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 50px;
+	color: black;
+	display: block;
+	width: 100px;
+	margin: 0 auto;
+	position: relative;
+}
+
+.contentHeader:before,
+.contentHeader:after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  border-bottom: 1px solid grey;
+  border-top: 1px solid grey;
+  top: 21.5px;
+  width: 80px;
+}
+.contentHeader:before {
+  right: 100%;
+  margin-right: 0;
+}
+.contentHeader:after {
+  left: 100%;
+  margin-left: 0;
+}
+
+.contentBody{
+	height:100%;
+	display:block;
+	margin: 0 auto;
+	width:80%;
+	font-family: 'Rajdhani', sans-serif;
+	font-size: 15px;
+	color: black;
+	overflow: hidden;
+}
+
