@@ -18,7 +18,6 @@
 	height: 100%;
 	z-index: 3;
 	/*color: #fff;*/
-	
 }
 
 .content {
@@ -61,11 +60,50 @@
 	width: 90%;
 	height: auto;
 	text-align: center;
-	font-size: 35px;
-	cursor: pointer;
+	font-size: 19px;
 	background-color: rgba(167, 200, 219, 0.81);
 	margin-top: 0px;
 	margin-bottom: 0px;
 	display: none;
 }
+ .posterImages {
+ 	height: 50%;
+	width: 333px;
+ }
 
+ .text {
+ 	width: 49%;
+ 	height: 100%;
+ 	display: inline-block;
+ 	float: left;
+ }
+
+ .images {
+ 	width: 49%;
+ 	height: 100%;
+ 	display: inline-block;
+ 	float: right;
+ }
+
+
+#acpc {
+	background-color: rgba(87, 145, 131, 0.71);
+}
+#acpc:hover {
+	background-color: rgba(87, 145, 131, 0.81);
+}
+#acpcDropDown {
+	background-color: rgba(87, 145, 131, 0.6);
+}
+
+ #worldFinals {
+ 	background-color: rgba(148, 144, 167, 0.93);
+}
+
+#worldFinals:hover {
+ 	background-color: rgba(148, 144, 167, 1);
+}
+#worldFinalsDropDown {
+ 	background-color: rgba(148, 144, 167, 0.6);
+ 	font-size: 19px;
+ }

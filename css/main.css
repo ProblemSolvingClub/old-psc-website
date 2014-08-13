@@ -58,7 +58,7 @@
 	font-family: 'Rajdhani', sans-serif;
 	text-decoration: none;
 	text-align: center;
-	font-size: 18px;
+	font-size: 19px;
 	font-weight: bold;
 	line-height: 50px;
 	color: black;
@@ -98,3 +98,13 @@
 	overflow: hidden;
 }
 
+.links {
+	text-decoration: none;
+	color: black;
+	font-size: 25px;
+}
+
+.links:hover {
+	text-shadow: 0.1em 0.1em 0.1em grey;
+	font-size: 25px;
+}

@@ -1,5 +1,7 @@
 $(document).ready(function() {
 	$('#ccpc').click(toggle);
+	$('#acpc').click(toggle);
+	$('#worldFinals').click(toggle);
 });
 
 function toggle() {
