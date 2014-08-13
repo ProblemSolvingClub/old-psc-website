@@ -1,3 +1,4 @@
+
 #background {
     position: absolute;
     top: 133px;
@@ -5,10 +6,10 @@
 	z-index: 3;
     width: 73%;
     height: 100%;
+    background-color: rgba(0, 62, 112, 1);
     /* background-repeat: no-repeat; */
     opacity: 0.4;
 	/*background-image: url('../img/MandelbrotSet.png');*/
-	background-color: rgba(0, 62, 112, 1);
 }
 
 .banner{
