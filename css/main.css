@@ -8,6 +8,7 @@
     /* background-repeat: no-repeat; */
     opacity: 0.4;
 	/*background-image: url('../img/MandelbrotSet.png');*/
+	background-color: rgba(0, 62, 112, 1);
 }
 
 .banner{
