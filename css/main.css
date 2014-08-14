@@ -95,7 +95,7 @@
 	font-family: 'Rajdhani', sans-serif;
 	font-size: 15px;
 	color: black;
-	overflow: hidden;
+	overflow: auto;
 }
 
 .links {

@@ -8,5 +8,5 @@ function toggle() {
 	var dropdown = "#";
 	dropdown += this.id;
 	dropdown += "DropDown";
-	$(dropdown).slideToggle(100);
+	$(dropdown).slideToggle(200);
 }

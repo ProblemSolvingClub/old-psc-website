@@ -1,3 +1,4 @@
+
 #background {
     position: absolute;
     top: 133px;
@@ -60,15 +61,18 @@
 	width: 90%;
 	height: auto;
 	text-align: center;
-	font-size: 19px;
+	font-size: 16px;
 	background-color: rgba(167, 200, 219, 0.81);
 	margin-top: 0px;
 	margin-bottom: 0px;
 	display: none;
+	padding-bottom: 10px;
 }
  .posterImages {
  	height: 50%;
 	width: 333px;
+	padding-top: 10px;
+	padding-bottom: 10px;
  }
 
  .text {
@@ -76,6 +80,9 @@
  	height: 100%;
  	display: inline-block;
  	float: left;
+ 	text-align: -webkit-auto;
+	padding-left: 10px;
+
  }
 
  .images {
@@ -83,6 +90,13 @@
  	height: 100%;
  	display: inline-block;
  	float: right;
+ }
+
+ .textWinners {
+ 	text-indent: 50px;
+ 	font-family: 'Playfair Display', serif;
+ 	margin-top: 0px;
+	margin-bottom: 0px;
  }
 
 
