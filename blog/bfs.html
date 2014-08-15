@@ -1,0 +1,283 @@
+<html>
+<head>
+  <script type="text/javascript" src="/raphael-min.js"></script>
+  <script type="text/javascript" src="/jquery.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function()
+    {
+      var rl = Raphael("animation", 200, 200);
+
+      var s = new Vertex(rl, 15, 15, 's');
+      var a = new Vertex(rl, 55, 15, '1');
+      var b = new Vertex(rl, 15, 55, '2');
+      var c = new Vertex(rl, 95, 15, '3');
+      var d = new Vertex(rl, 55, 55, '4');
+      var e = new Vertex(rl, 15, 95, '5');
+
+      s.adj.push(a);
+      s.adj.push(b);
+
+      a.adj.push(c);
+      a.adj.push(d);
+
+      b.adj.push(d);
+      b.adj.push(e);
+
+      var V = [s, a, b, c, d, e];
+
+      var animate = function(){setTimeout(function()
+      {
+        V.forEach(function(v)
+        {
+          v.color('white');
+          v.visited = false;
+        });
+
+        bfs(V, s, animate);
+      }, 1000);};
+      animate();
+    });
+
+    function bfs(V, s, callback)
+    {
+      s.color('red');
+      s.visited = true;
+
+      queue = [];
+      queue.push(s);
+
+      var iterate = function(time){setTimeout(function()
+      {
+        if(queue.length)
+        {
+          var v = queue.shift();
+          v.color('black');
+
+          var E = []; v.adj.forEach(function(u){E.push(u);});
+          var visit = function(t){setTimeout(function()
+          {
+            if(E.length)
+            {
+              var u = E.pop();
+              if(!u.visited)
+              {
+                u.visited = true;
+                u.color('grey');
+                queue.push(u);
+                visit(1000);
+              } else
+              {
+                visit(0);
+              }
+            } else
+            {
+              iterate(0);
+            }
+          }, t);}
+          visit(1000);
+        } else
+        {
+          callback();
+        }
+      }, time);};
+      iterate(1000);
+    }
+
+    function Vertex(rl, x, y, label)
+    {
+      this.x = x;
+      this.y = y;
+      this.label = label;
+      this.adj = [];
+
+      this.graphic = rl.circle(x, y, 10);
+      this.text = rl.text(x, y, label);
+
+      this.color = function(color)
+      {
+        if(color == "white")
+          this.graphic.attr('fill', '#fff');
+        else if(color == "grey")
+          this.graphic.attr('fill', '#aaa');
+        else if(color == "black")
+          this.graphic.attr('fill', '#000');
+        else if(color == "red")
+          this.graphic.attr('fill', '#f00');
+      };
+    }
+  </script>
+</head>
+<body>
+<p>
+Let's say, by some miraculous turn of events, that you have a problem which can
+be modelled as a graph! And let's say this problem involves finding the shortest
+distance between two vertices on this graph. Then a good place to start would be
+with a Breadth-First Search, or BFS.
+</p>
+
+<p>
+BFS is one of the simplest graph algorithms, but understanding it is important
+since it is a conceptual stepping-stone to more intricate ones.
+</p>
+
+<h1>Overview:</h1>
+
+<p>
+The idea behind BFS is that it starts at some initial vertex in the graph and
+works its way out from this vertex to all others, level by level. That is, all
+vertices of distance d from the start vertex will get visited before any
+vertices of distance <var>d</var> + 1. By working its way out level by level,
+BFS is guaranteed to find, for every vertex, the shortest possible path from the
+starting point. Another way to think about this level-by-level traversal of the
+graph is that it expands the <em>width</em> of the search as far as possible
+before expanding the <em>depth</em> of the search. This is where the name comes
+from!
+</p>
+
+// Put an animation here!
+<div class="animation" id="animation" style="background: #ddd;">
+</div>
+
+<h1>Pseudocode:</h1>
+
+<p>
+The basic pseudocode for this algorithm is as follows:
+</p>
+
+<pre><code>
+1 bfs( (V, E), s ):
+2   for each vertex v in V:
+3     mark v as not visited
+4   end for
+
+5   mark s as visited
+6   add s to queue
+
+7   while queue is not empty:
+8     remove a vertex v from queue
+
+9     for each vertex u adjacent to v:
+10      if u is not visited:
+11        mark u as visited
+12        add u to queue
+13      end if
+14    end for
+15  end while
+</code></pre>
+
+<p>
+Lines 2 to 4 serve only to set up the starting conditions for the search; before
+the search begins, each vertex must not be considered as <em>visited</em>, until
+it actually has been visited.
+</p>
+
+<p>
+Lines 5 and 6 add the starting vertex to the queue and mark it as visited.
+Vertices are marked as <em>visited</em> when they are added to the queue. This
+is done so that the algorithm does not add a vertex to the queue more than once.
+</p>
+
+<p>
+The interesting part happens on line 7 and afterwards. The loop will iterate
+until queue is empty. At the beginning, the queue has only the starting vertex,
+<var>s</var>. So on line 8, <var>s</var> gets removed from the queue and
+assigned to <var>v</var>. Now the loop on line 9 iterates through each vertex
+that is connected to <var>v</var> (i.e. <var>s</var>, at this point). Each of
+these vertices is added to the queue and marked as visited. When the loop has
+finished, or terminated, all of the vertices adjacent to <var>s</var> have been
+added to the queue, and line 7 gets executed again. This time, on line 8, the
+first vertex that was adjacent to <var>s</var> gets removed and the process gets
+repeated.
+</p>
+
+<p>
+What is crucial to the understanding of how the algorithm works is an
+understanding of how queues work. After the first iteration of the
+<em>while</em> loop, when the starting vertex was processed, all of the vertices
+adjacent to the starting vertex are in the queue. This means that all vertices
+added to the queue later will be processed last. This is the fundamental
+property that makes the BFS work. Because of this property, we can see that each
+'level' of the graph gets traversed before the next 'level'.
+</p>
+
+<p>
+The above pseudocode gives the structure for BFS, but notice that it does not
+actually <em>do</em> anything. Each vertex is traversed in the order required by
+the BFS but nothing is done when the vertex is visited. So! Let's remedy this.
+</p>
+
+<pre><code>
+1 bfs( (V, E), s ):
+2   for each vertex v in V:
+3     mark v as not visited
+4     distance[v] = 0
+5   end for
+
+6   mark s as visited
+7   add s to queue
+
+8   while queue is not empty:
+9     remove a vertex v from queue
+
+10    for each vertex u adjacent to v:
+11      if u is not visited:
+12        distance[u] = distance[v] + 1
+13        mark u as visited
+14        add u to queue
+15      end if
+16    end for
+17  end while
+</code></pre>
+
+<p>
+The differences are on lines 4, 12, and 18. The purpose of these additions is
+to calculate the distance of each vertex from <var>s</var>. The important bit
+happens on line 12. This does what we want it to because of the properties that
+we established above; namely, the property that each level of the graph gets
+traversed before the next. Since each level has the same distance from
+<var>s</var>, this means that all the nodes that are of distance <var>d</var>
+from <var>s</var> are processed before any nodes of distance <var>d + 1</var>.
+So when line 12 is reached for some vertex <var>u</var>, we know two things:
+that <var>u</var> has not yet been added to the queue, and that <var>u</var> is
+farther away from <var>s</var> than <var>v</var>. So when <var>distance[u]</var>
+is assigned the value of <var>distance[v] + 1</var>, we know that this is the
+shortest possible distance from <var>s</var> to <var>v</var>!
+</p>
+
+<p>
+But what if this isn't enough for us? We don't want to know only the distance
+from <var>s</var>, we want to know how to get from <var>s</var> to the vertex!
+Another small change to the algorithm will let us do this as well.
+</p>
+
+<pre><code>
+1 bfs( (V, E), s ):
+2   for each vertex v in V:
+3     mark v as not visited
+4     distance[v] = 0
+5     predecessor[v] = null
+6   end for
+
+7   mark s as visited
+8   add s to queue
+
+9   while queue is not empty:
+10    remove a vertex v from queue
+
+11    for each vertex u adjacent to v:
+12      if u is not visited:
+13        distance[u] = distance[v] + 1
+14        predecessor[u] = v
+15        mark u as visited
+16        add u to queue
+17      end if
+18    end for
+19  end while
+</code></pre>
+
+<p>
+The differences here are on lines 5 and 14. Line 14 assigns <var>v</var> to be
+the <em>predecessor</em> of <var>u</var>.
+</p>
+
+</body>
