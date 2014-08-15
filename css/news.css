@@ -1,0 +1,123 @@
+
+#background {
+    position: absolute;
+    top: 133px;
+    left: 0;
+	z-index: 3;
+    width: 73%;
+    height: 100%;
+    /* background-repeat: no-repeat; */
+    opacity: 0.4;
+	/*background-image: url('../img/MandelbrotSet.png');*/
+	background-color: rgba(0, 62, 112, 0.21);
+}
+
+.mainContent {
+	width: 73%;
+	left: 0%;
+	position: absolute;
+	height: 100%;
+	z-index: 3;
+	/*color: #fff;*/
+}
+
+.content {
+	position: absolute;
+	height: 100%;
+	width:100%;
+	z-index: 3;
+	/*color: #fff;*/
+	display: block;
+}
+
+.newsBanner {
+	border: 2px transparent;
+	border-radius: 15px 15px 15px 15px;
+	-moz-border-radius: 15px 15px 15px 15px;
+	-webkit-border-radius: 15px 15px 15px 15px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 0;
+	margin-top: 0;
+	width: 90%;
+	height: 65px;
+	text-align: center;
+	font-size: 35px;
+	cursor: pointer;
+	background-color: rgba(145, 173, 189, 0.71);
+}
+
+.newsBanner:hover {
+	background-color: rgba(145, 173, 189, 1)
+}
+
+.dropdown {
+	border: 2px transparent;
+	border-radius: 0px 0px 15px 15px;
+	-moz-border-radius: 0px 0px 15px 15px;
+	-webkit-border-radius: 0px 0px 15px 15px;
+	margin-right: auto;
+	margin-left: auto;
+	width: 90%;
+	height: auto;
+	text-align: center;
+	font-size: 16px;
+	background-color: rgba(167, 200, 219, 0.81);
+	margin-top: 0px;
+	margin-bottom: 0px;
+	display: none;
+	padding-bottom: 10px;
+}
+ .posterImages {
+ 	height: 50%;
+	width: 333px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+ }
+
+ .text {
+ 	width: 49%;
+ 	height: 100%;
+ 	display: inline-block;
+ 	float: left;
+ 	text-align: -webkit-auto;
+	padding-left: 10px;
+
+ }
+
+ .images {
+ 	width: 49%;
+ 	height: 100%;
+ 	display: inline-block;
+ 	float: right;
+ }
+
+ .textWinners {
+ 	text-indent: 50px;
+ 	font-family: 'Playfair Display', serif;
+ 	margin-top: 0px;
+	margin-bottom: 0px;
+ }
+
+
+#acpc {
+	background-color: rgba(87, 145, 131, 0.71);
+}
+#acpc:hover {
+	background-color: rgba(87, 145, 131, 0.81);
+}
+#acpcDropDown {
+	background-color: rgba(87, 145, 131, 0.6);
+}
+
+ #worldFinals {
+ 	background-color: rgba(148, 144, 167, 0.93);
+}
+
+#worldFinals:hover {
+ 	background-color: rgba(148, 144, 167, 1);
+}
+#worldFinalsDropDown {
+ 	background-color: rgba(148, 144, 167, 0.6);
+ 	font-size: 19px;
+ }

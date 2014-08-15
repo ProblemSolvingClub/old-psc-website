@@ -1,12 +1,14 @@
 html {
 	height: 100%; /* fix height to 100% for IE*/
-	max-height: 100%; /* fix height for other browsers*/
+	max-height: 100%;  /*fix height for other browsers*/
 	padding: 0; /* remove padding */
 	margin: 0; /* remove margins */
 	border: 0; /* remove borders*/
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
+	min-width: 1000px;
+	min-height: 100px;
 }
 
 *{
@@ -18,14 +20,14 @@ body {
 	height: 100%;
 	margin: 0px;
 	padding: 0px 0px 0px 0px;
-	min-width: 500px;
-	overflow: hidden;
+	min-width: 1000px;
+	overflow: auto;
 }
 
 /* General */
 #navbar {
 	height: 133px;
-	background-color: white;
+	background-color: #E5E5E5;
 	margin: 0;
 	padding: 0;
 	width: 100%;
@@ -103,10 +105,10 @@ body {
 	left: 73%;
 	width: 27%;
 	position: absolute;
-	height: 100%;
 	padding: 0 4%;
 	z-index: 3;
 	color: #fff;
+	height: 100%;
 }
 
 #sidenavContent{

@@ -1,4 +1,17 @@
 
+#background {
+    position: absolute;
+    top: 133px;
+    left: 0;
+	z-index: 3;
+    width: 73%;
+    height: 100%;
+    background-color: rgba(0, 62, 112, 1);
+    /* background-repeat: no-repeat; */
+    opacity: 0.4;
+	/*background-image: url('../img/MandelbrotSet.png');*/
+}
+
 .banner{
 	background-color: #222326;
 	width: 80%;
@@ -9,6 +22,7 @@
 	margin: auto;
 	margin-top: 20px;
 	margin-bottom: 10px;
+	display: none;
 }
 .mainContent{
 	width: 73%;
@@ -17,6 +31,7 @@
 	height: 100%;
 	z-index: 3;
 	color: #fff;
+	
 }
 
 .content{
@@ -43,7 +58,7 @@
 	font-family: 'Rajdhani', sans-serif;
 	text-decoration: none;
 	text-align: center;
-	font-size: 18px;
+	font-size: 19px;
 	font-weight: bold;
 	line-height: 50px;
 	color: black;
@@ -80,6 +95,16 @@
 	font-family: 'Rajdhani', sans-serif;
 	font-size: 15px;
 	color: black;
-	overflow: hidden;
+	overflow: auto;
 }
 
+.links {
+	text-decoration: none;
+	color: black;
+	font-size: 25px;
+}
+
+.links:hover {
+	text-shadow: 0.1em 0.1em 0.1em grey;
+	font-size: 25px;
+}
