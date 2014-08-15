@@ -14,14 +14,14 @@
       var d = new Vertex(rl, 55, 55, '4');
       var e = new Vertex(rl, 15, 95, '5');
 
-      s.adj.push(a);
-      s.adj.push(b);
+      undirectedEdge(rl, s, a);
+      undirectedEdge(rl, s, b);
 
-      a.adj.push(c);
-      a.adj.push(d);
+      undirectedEdge(rl, a, c);
+      undirectedEdge(rl, a, d);
 
-      b.adj.push(d);
-      b.adj.push(e);
+      undirectedEdge(rl, b, d);
+      undirectedEdge(rl, b, e);
 
       var V = [s, a, b, c, d, e];
 
@@ -37,6 +37,17 @@
       }, 1000);};
       animate();
     });
+
+    function undirectedEdge(rl, a, b)
+    {
+      a.adj.push(b);
+      b.adj.push(a);
+
+      var path = rl.path(['M', a.x, a.y, 'L', b.x, b.y]);
+      path.toBack();
+
+      return path;
+    }
 
     function bfs(V, s, callback)
     {
