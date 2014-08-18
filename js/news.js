@@ -7,6 +7,14 @@ $(document).ready(function() {
 function toggle() {
 	var dropdown = "#";
 	dropdown += this.id;
+	var temp = dropdown;
 	dropdown += "DropDown";
-	$(dropdown).slideToggle(200);
+	if( $(temp).hasClass("roundedBottomCorners") == false) {
+		$(temp).addClass("roundedBottomCorners");
+		$(dropdown).slideToggle(100);
+	}
+	else {
+		$(dropdown).slideToggle(50);
+		$(temp).removeClass("roundedBottomCorners");
+	}	
 }

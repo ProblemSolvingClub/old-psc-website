@@ -52,6 +52,12 @@
 	background-color: rgba(145, 173, 189, 1)
 }
 
+.roundedBottomCorners {
+	border-radius: 15px 15px 0px 0px;
+	-moz-border-radius: 15px 15px 0px 0px;
+	-webkit-border-radius: 15px 15px 0px 0px;
+}
+
 .dropdown {
 	border: 2px transparent;
 	border-radius: 0px 0px 15px 15px;
