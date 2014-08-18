@@ -2,6 +2,7 @@ $(document).ready(function() {
 	$('#ccpc').click(toggle);
 	$('#acpc').click(toggle);
 	$('#worldFinals').click(toggle);
+	$('#ccpc2013').click(toggle);
 });
 
 function toggle() {
