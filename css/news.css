@@ -28,6 +28,7 @@
 	z-index: 3;
 	/*color: #fff;*/
 	display: block;
+	overflow: auto;
 }
 
 .newsBanner {
