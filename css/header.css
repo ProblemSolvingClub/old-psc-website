@@ -35,7 +35,7 @@ body {
 }
 
 #navLogo {
-	background-image: url('../img/pscinverted.png');
+	background-image: url('../img/pscInverted.png');
 	background-repeat: no-repeat;
 	position: absolute;
 	display: block;
@@ -140,7 +140,7 @@ body {
 	list-style: none;
 	font-family: 'Rajdhani', sans-serif;
 	font-weight: normal;
-	font-size: 15px;
+	font-size: 17px;
 }
 
 #sidenavContent ul li a{
@@ -164,4 +164,5 @@ body {
 	-webkit-transition: color 0.5s ease;
 	-moz-transition: color 0.5s ease;
 	transition: color 0.5s ease;
+	font-size: 22px;
 }

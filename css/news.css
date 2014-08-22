@@ -29,6 +29,7 @@
 	/*color: #fff;*/
 	display: block;
 	overflow: auto;
+	padding-bottom: 15%;
 }
 
 .newsBanner {

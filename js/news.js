@@ -3,6 +3,10 @@ $(document).ready(function() {
 	$('#acpc').click(toggle);
 	$('#worldFinals').click(toggle);
 	$('#ccpc2013').click(toggle);
+
+	var url = $(location).attr('href');
+	var pieces = url.split("#");
+	$('#'+pieces[1]).click();
 });
 
 function toggle() {
