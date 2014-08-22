@@ -12,10 +12,12 @@ function toggle() {
 	dropdown += "DropDown";
 	if( $(temp).hasClass("roundedBottomCorners") == false) {
 		$(temp).addClass("roundedBottomCorners");
+		$(temp).css("margin-bottom", "1px");
 		$(dropdown).slideToggle(100);
 	}
 	else {
 		$(dropdown).slideToggle(50);
 		$(temp).removeClass("roundedBottomCorners");
+
 	}	
 }

@@ -32,20 +32,21 @@
 }
 
 .newsBanner {
-	border: 2px transparent;
+	border: 1px solid;
 	border-radius: 15px 15px 15px 15px;
 	-moz-border-radius: 15px 15px 15px 15px;
 	-webkit-border-radius: 15px 15px 15px 15px;
 	margin-right: auto;
 	margin-left: auto;
-	margin-bottom: 0;
-	margin-top: 0;
+	margin-bottom: 15px;
+	margin-top: 15px;
 	width: 90%;
 	height: 65px;
 	text-align: center;
 	font-size: 35px;
 	cursor: pointer;
 	background-color: rgba(145, 173, 189, 0.71);
+	box-shadow: 0px 5px 5px #888888;
 }
 
 .newsBanner:hover {
@@ -73,6 +74,9 @@
 	margin-top: 0px;
 	margin-bottom: 0px;
 	padding-bottom: 10px;
+	display: none;
+	border: 1px solid;
+	box-shadow: 0px 3px 3px #888888;
 }
  .posterImages {
  	height: 50%;
