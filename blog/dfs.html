@@ -1,0 +1,249 @@
+<html>
+<head>
+  <script type="text/javascript" src="/raphael-min.js"></script>
+  <script type="text/javascript" src="/jquery.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function()
+    {
+      setTimeout(function(){playAnimation1();}, 0);
+      //setTimeout(function(){playAnimation2();}, 0);
+    });
+
+    function playAnimation2()
+    {
+      var rl = Raphael("animation2", 200, 200);
+
+      var s = new Vertex(rl, 15, 15, 's');
+      var a = new Vertex(rl, 55, 15, 'a');
+      var b = new Vertex(rl, 15, 55, 'b');
+      var c = new Vertex(rl, 95, 15, 'c');
+      var d = new Vertex(rl, 55, 55, 'd');
+      var e = new Vertex(rl, 15, 95, 'e');
+
+      undirectedEdge(rl, s, a);
+      undirectedEdge(rl, s, b);
+
+      undirectedEdge(rl, a, c);
+      undirectedEdge(rl, b, e);
+
+      var V = [s, a, b, c, d, e];
+
+      var animate = function(){setTimeout(function()
+      {
+        V.forEach(function(v)
+        {
+          v.color('white');
+          v.visited = false;
+        });
+
+        bfs(V, s, animate);
+      }, 1000);};
+      animate();
+    }
+
+    function playAnimation1()
+    {
+      var rl = Raphael("animation1", 200, 200);
+
+      var s = new Vertex(rl, 15, 15, 's');
+      var a = new Vertex(rl, 55, 15, 'a');
+      var b = new Vertex(rl, 15, 55, 'b');
+      var c = new Vertex(rl, 95, 15, 'c');
+      var d = new Vertex(rl, 55, 55, 'd');
+      var e = new Vertex(rl, 15, 95, 'e');
+
+      undirectedEdge(rl, s, a);
+      undirectedEdge(rl, s, b);
+
+      undirectedEdge(rl, a, c);
+      undirectedEdge(rl, a, d);
+
+      undirectedEdge(rl, b, d);
+      undirectedEdge(rl, b, e);
+
+      var V = [s, a, b, c, d, e];
+
+      var animate = function(){setTimeout(function()
+      {
+        V.forEach(function(v)
+        {
+          v.color('white');
+          v.visited = false;
+        });
+
+        dfs(V, s, animate);
+      }, 1000);};
+      animate();
+    }
+
+    function undirectedEdge(rl, a, b)
+    {
+      a.adj.push(b);
+      b.adj.push(a);
+
+      var path = rl.path(['M', a.x, a.y, 'L', b.x, b.y]);
+      path.toBack();
+
+      return path;
+    }
+
+    function dfs(V, s, callback)
+    {
+      console.log('dfs on ' + s);
+      s.color('grey');
+      var E = [];
+      s.adj.forEach(function(u){E.push(u);});
+      var visit = function(t){setTimeout(function()
+      {
+        if(E.length)
+        {
+          var u = E.pop();
+          console.log('visiting ' + u);
+          if(!u.visited)
+          {
+            u.visited = true;
+            dfs(V, u, visit);
+          } else if(callback)
+          {
+            setTimeout(callback, 1000);
+          } else
+          {
+            visit(0);
+          }
+        }
+      }, t >= 0 ? t : 1000)};
+      visit();
+    }
+
+    function bfs(V, s, callback)
+    {
+      s.color('red');
+      s.visited = true;
+
+      queue = [];
+      queue.push(s);
+
+      var iterate = function(time){setTimeout(function()
+      {
+        if(queue.length)
+        {
+          var v = queue.shift();
+          v.color('black');
+
+          var E = []; v.adj.forEach(function(u){E.push(u);});
+          var visit = function(t){setTimeout(function()
+          {
+            if(E.length)
+            {
+              var u = E.pop();
+              if(!u.visited)
+              {
+                u.visited = true;
+                u.color('grey');
+                queue.push(u);
+                visit(1000);
+              } else
+              {
+                visit(0);
+              }
+            } else
+            {
+              iterate(0);
+            }
+          }, t);}
+          visit(1000);
+        } else
+        {
+          callback();
+        }
+      }, time);};
+      iterate(1000);
+    }
+
+    function Vertex(rl, x, y, label)
+    {
+      this.x = x;
+      this.y = y;
+      this.label = label;
+      this.adj = [];
+
+      this.graphic = rl.circle(x, y, 10);
+      this.text = rl.text(x, y, label);
+
+      this.color = function(color)
+      {
+        if(color == "white")
+          this.graphic.attr('fill', '#fff');
+        else if(color == "grey")
+          this.graphic.attr('fill', '#aaa');
+        else if(color == "black")
+          this.graphic.attr('fill', '#000');
+        else if(color == "red")
+          this.graphic.attr('fill', '#f00');
+      };
+    }
+  </script>
+</head>
+<body>
+  <p>Depth-First Search</p>
+
+<p>Recommended reading: <a href="/blog/bfs.html">Breadth-First Search</a></p>
+
+<h1>Overview:</h1>
+
+<p>
+  I will assume, here, that you are familiar with the Breadth-First Search
+  (BFS).  If you recall, the BFS is so named because it widens its search in the
+  graph as far as possible before going any deeper. As you might expect, the
+  Depth-First Search (DFS) does the opposite! Even though it uses the opposite
+  strategy to the BFS, DFS can still be used for many of the same purposes. For
+  example, DFS can also be used to check if a graph is connected. However, DFS
+  is not a good algorithm for finding any shortest paths! To understand why,
+  think about what it means to traverse a graph "depth-first": the algorithm
+  will select a path, and then follow that path until its end before starting
+  down a new path. So, if we use the DFS, it might select the <em>longest</em>
+  possible path to a vertex first! Of course, it may also select the shortest
+  path, or any path in between.
+</p>
+
+<p>
+  So, if DFS can do <em>some</em> of the things BFS can do, but not <em>all</em>
+  of them, what is the point of it? Why would we bother with it at all if it is
+  the weaker tool? The answer, obviously, is that it is not a weaker tool, and
+  has its own special strengths. One of the very nice things about the DFS is
+  that it can be easily implemented <em>recursively</em>. This is very nice
+  indeed! DFS is also very useful because it can be used to find lots of
+  important information about a graph's structure that is more difficult with a
+  BFS; for example, detecting cycles. Many of the other reasons to keep DFS
+  around will become apparent in more advanced algorithms, for which DFS serves
+  as a starting point.
+</p>
+
+<p>
+  So, how might we go about doing a DFS? As stated above, a DFS can be
+  implemented recursively, as follows:
+</p>
+
+<pre><code>
+    function dfs(G = (V, E), s):
+      for each edge (s, u) in E:
+        if u is not visited:
+          mark u as visited
+          dfs(G, u)
+        end if
+      end for
+    end function
+</pre></code>
+
+<p>
+  A very simple recursive function! Almost half of it is just "end [whatever]"!
+  It's quite straightforward to see what this is doing: start at some vertex,
+  and for each of the edges leaving it, do everything over again with the next
+  vertex as the start! And as it recurses, it marks each vertex that it has
+  visited so that it does not repeat itself. Easy!
+</p>
+
+<div class="animation" id="animation1" style="background: #ddd;">
+</div>
+</body>
+</html>

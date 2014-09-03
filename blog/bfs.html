@@ -5,14 +5,52 @@
   <script type="text/javascript">
     $(document).ready(function()
     {
-      var rl = Raphael("animation", 200, 200);
+      setTimeout(function(){playAnimation1();}, 0);
+      //setTimeout(function(){playAnimation2();}, 0);
+    });
+
+    function playAnimation2()
+    {
+      var rl = Raphael("animation2", 200, 200);
 
       var s = new Vertex(rl, 15, 15, 's');
-      var a = new Vertex(rl, 55, 15, '1');
-      var b = new Vertex(rl, 15, 55, '2');
-      var c = new Vertex(rl, 95, 15, '3');
-      var d = new Vertex(rl, 55, 55, '4');
-      var e = new Vertex(rl, 15, 95, '5');
+      var a = new Vertex(rl, 55, 15, 'a');
+      var b = new Vertex(rl, 15, 55, 'b');
+      var c = new Vertex(rl, 95, 15, 'c');
+      var d = new Vertex(rl, 55, 55, 'd');
+      var e = new Vertex(rl, 15, 95, 'e');
+
+      undirectedEdge(rl, s, a);
+      undirectedEdge(rl, s, b);
+
+      undirectedEdge(rl, a, c);
+      undirectedEdge(rl, b, e);
+
+      var V = [s, a, b, c, d, e];
+
+      var animate = function(){setTimeout(function()
+      {
+        V.forEach(function(v)
+        {
+          v.color('white');
+          v.visited = false;
+        });
+
+        bfs(V, s, animate);
+      }, 1000);};
+      animate();
+    }
+
+    function playAnimation1()
+    {
+      var rl = Raphael("animation1", 200, 200);
+
+      var s = new Vertex(rl, 15, 15, 's');
+      var a = new Vertex(rl, 55, 15, 'a');
+      var b = new Vertex(rl, 15, 55, 'b');
+      var c = new Vertex(rl, 95, 15, 'c');
+      var d = new Vertex(rl, 55, 55, 'd');
+      var e = new Vertex(rl, 15, 95, 'e');
 
       undirectedEdge(rl, s, a);
       undirectedEdge(rl, s, b);
@@ -36,7 +74,7 @@
         bfs(V, s, animate);
       }, 1000);};
       animate();
-    });
+    }
 
     function undirectedEdge(rl, a, b)
     {
@@ -119,6 +157,8 @@
   </script>
 </head>
 <body>
+<h1>Breadth-First Search</h1>
+
 <p>
 Let's say, by some miraculous turn of events, that you have a problem which can
 be modelled as a graph! And let's say this problem involves finding the shortest
@@ -145,11 +185,10 @@ before expanding the <em>depth</em> of the search. This is where the name comes
 from!
 </p>
 
-// Put an animation here!
-<div class="animation" id="animation" style="background: #ddd;">
+<div class="animation" id="animation1" style="background: #ddd;">
 </div>
 
-<h1>Pseudocode:</h1>
+<h1>Basics:</h1>
 
 <p>
 The basic pseudocode for this algorithm is as follows:
@@ -211,6 +250,7 @@ property that makes the BFS work. Because of this property, we can see that each
 'level' of the graph gets traversed before the next 'level'.
 </p>
 
+<h1>Simple Modifications:</h1>
 <p>
 The above pseudocode gives the structure for BFS, but notice that it does not
 actually <em>do</em> anything. Each vertex is traversed in the order required by
@@ -265,30 +305,101 @@ Another small change to the algorithm will let us do this as well.
 1 bfs( (V, E), s ):
 2   for each vertex v in V:
 3     mark v as not visited
-4     distance[v] = 0
+4     distance[v] = infinity
 5     predecessor[v] = null
 6   end for
 
 7   mark s as visited
 8   add s to queue
+9   distance[s] = 0
 
-9   while queue is not empty:
-10    remove a vertex v from queue
+10  while queue is not empty:
+11    remove a vertex v from queue
 
-11    for each vertex u adjacent to v:
-12      if u is not visited:
-13        distance[u] = distance[v] + 1
-14        predecessor[u] = v
-15        mark u as visited
-16        add u to queue
-17      end if
-18    end for
-19  end while
+12    for each vertex u adjacent to v:
+13      if u is not visited:
+14        distance[u] = distance[v] + 1
+15        predecessor[u] = v
+16        mark u as visited
+17        add u to queue
+18      end if
+19    end for
+20  end while
 </code></pre>
 
 <p>
 The differences here are on lines 5 and 14. Line 14 assigns <var>v</var> to be
-the <em>predecessor</em> of <var>u</var>.
+the <em>predecessor</em> of <var>u</var>. The predecessor of some vertex
+<var>u</var> is the vertex that we would come from to get to <var>u</var> from
+<var>s</var>. It may not be obvious why this helps us find paths in the graph
+yet. To find the paths, remember that since the predecessor is the vertex we
+came from to get to <var>u</var>, we must have gotten to the predecessor
+somehow, so it has its very own predecessor too! Then we can travel backwards
+from some vertex <var>u</var> to its predecessor, and then travel backwards
+again, until we get to <var>s</var>! This gives us a path, in reverse order,
+from <var>s</var> to <var>u</var>. This might look as follows:
 </p>
 
+<pre><code>
+1 while predecessor[u] is not empty:
+2   p = predecessor[u]
+3   add p to path
+4   u = p
+5 reverse path
+</code></pre>
+
+<h1>Advanced Modifications:</h1>
+
+<p>
+Up to this point, we have been assuming some properties of the graph. Namely, we
+have assumed that the graph is <em>connected</em>, <em>unweighted</em>, and
+<em>undirected</em>.
+</p>
+
+<p>
+First, let's see what happens when we have a disconnected graph.
+</p>
+<div class="animation" id="animation2" style="background: #ddd;">
+</div>
+<p>
+  As you can see, vertex <var>d</var> never gets visited. It is really quite
+  obvious why this happens. There are some important and useful consequences of
+  this:
+  <ol>
+    <li> <var>d</var> will stay "white", or, <var>visited[d] = false</var>.</li>
+    <li> <var>distance[d]</var> is infinity.</li>
+    <li> <var>predecessor[d]</var> is <var>null</var>. </li>
+  </ol>
+  Property 1 can be very useful. If the search terminates and there is a vertex
+  whose color is still white, or its <em>visited</em> property is
+  <var>false</var>, then we know this vertex is not connected to the start
+  vertex <var>s</var>. That means we can use this property to check if the graph
+  is connected using a BFS! This is the first example of an alternate use for
+  the BFS algorithm.
+</p>
+
+<p>
+  Property 2 can be used for the same purpose; however, there are some
+  implementation details to consider before we use it! You may have noticed that
+  Integers in most programming languages can't be set to <var>infinity</var>! So
+  you can try using something like <code>Integer.MAX_VALUE</code> in Java. This
+  is usually safe, but not always, since there might be the case where you
+  actually have a graph with a path of this length! But since we have made the
+  assumption that the graph is unweighted, we know that the distance can't be
+  negative. So you can use a negative value as a substitute for infinity.
+</p>
+
+<p>
+Now, what happens if the graph is directed? It just so happens that the BFS
+continues to work in this case! Too, the above three properties will still hold
+if the graph is both directed and disconnected.
+</p>
+
+<p>
+As for weighted graphs, that is a more advanced topic that will be covered
+later!
+</p>
+
+<h1>Sample Problems:</h1>
+<p> No sample problems yet!</p>
 </body>
